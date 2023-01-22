@@ -69,12 +69,6 @@
       "unique": true,
       "maxLength": 30,
       "minLength": 5
-    },
-    "articles": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::article.article",
-      "mappedBy": "users_permissions_user"
     }
   }
 }
