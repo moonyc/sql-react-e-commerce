@@ -19,11 +19,11 @@ function Layout({ children }) {
   return (
     <div>
      <NavBar categories={data.allStrapiCategory.edges}/>
-     <div style={{ marginBottom: "30rem"}}/>
+     <div style={{ marginBottom: "10rem"}}/>
       <main>
        {children}
       </main>
-      <Footer />
+      <Footer style={{bottom: 0}}/>
     </div>
   )
 }
