@@ -12,7 +12,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import { useMediaQuery } from '@material-ui/core';
-import { Link, navigate } from 'gatsby'
+import { Link } from 'gatsby'
 
 
 import search from '../../images/search.svg'
@@ -118,7 +118,7 @@ function NavBar({ categories }) {
         {icon: menu, alt: 'menu', visible: matchesMD, onClick: () => setDrawerOpen(true)}
         ]
     return (
-        <AppBar color="transparent" elevation={0}>
+        <AppBar color="transparent" elevation={0} position="static">
             <Toolbar>
                 <Button component={Link} to="/" classes={{ root: classes.logoContainer}}>
                     <Typography variant="h1">
@@ -142,6 +142,7 @@ function NavBar({ categories }) {
                     />
                     </IconButton>
                     )}
+                    else { return (null)}
                  } 
                 )}
             </Toolbar>
