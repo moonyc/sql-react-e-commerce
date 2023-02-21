@@ -36,6 +36,9 @@
       "relation": "oneToMany",
       "target": "api::variant.variant",
       "mappedBy": "product"
+    },
+    "promo": {
+      "type": "boolean"
     }
   }
 }
