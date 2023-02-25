@@ -87,7 +87,7 @@ export default function PromotionalProducts() {
         content: (
             <Grid container direction='column' alignItems='center'>
                 <Grid item>
-                    <IconButton disableRipple 
+                    <IconButton disableFocusRipple disableRipple 
                     onClick={() => setSelectedSlide(i)}
                     classes={{root: clsx(classes.iconButton, {
                         [classes.space]: selectedSlide !== i

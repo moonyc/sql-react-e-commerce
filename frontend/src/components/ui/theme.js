@@ -53,7 +53,7 @@ const theme = createTheme({
    },
    h5: {
      fontFamily: "Philosopher",
-     fontSize: "2rem",
+     fontSize: "1.5rem",
      fontWeight: 700,
      fontStyle: "italic",
      color: "#ffffff"

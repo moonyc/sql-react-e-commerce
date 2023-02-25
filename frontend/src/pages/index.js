@@ -3,6 +3,7 @@ import Layout from "../components/ui/layout"
 import HeroBlock from "../components/home/hero"
 import PromotionalProducts from "../components/home/PromotionalProducts"
 import FeaturedProducts from "../components/home/FeaturedProducts"
+import MarketingButtons from "../components/home/MarketingButtons"
 
 const IndexPage = () => {
   return (
@@ -10,6 +11,7 @@ const IndexPage = () => {
       <HeroBlock/>
       <PromotionalProducts/>
       <FeaturedProducts/>
+      <MarketingButtons />
     </Layout>
   )
 }
