@@ -7,7 +7,7 @@ import Carousel from 'react-spring-3d-carousel'
 import clsx from 'clsx'
 import { useStaticQuery, graphql } from 'gatsby'
 import { makeStyles  } from '@material-ui/core/styles'
-
+import  useMediaQuery  from '@material-ui/core/useMediaQuery'
 import promoAdornment from '../../images/promo-adornment.svg'
 import explore from '../../images/explore.svg'
 
@@ -20,10 +20,10 @@ const useStyles = makeStyles(theme => ({
         backgroundRepeat: 'no-repeat',
         width: '100%',
         height: '70rem',
-        paddingLeft: '10rem',
-        paddingRight: '10rem',
-        paddingTom: '30rem',
-        paddingBottom: '10rem'  
+        padding: "30rem 10rem 10rem 10rem",
+        [theme.breakpoints.down('md')]: {
+            padding: '20rem 5rem 5rem 5rem'
+        },
     },
     productName: {
         color: '#fff'
@@ -31,35 +31,61 @@ const useStyles = makeStyles(theme => ({
     iconButton: {
         "&:hover": {
             backgroundColor: 'transparent'
-        }
+        },
+        
     },
     carouselImage: {
         height: '25rem',
         width: '20rem',
-        backgroundColor: 'rgba(225,225,225, 0.2)',
+        backgroundColor: 'transparent',
         borderRadius: 20,
-        boxShadow: theme.shadows[5]
+        boxShadow: theme.shadows[0],
+        [theme.breakpoints.down('sm')]: {
+            height: '20rem',
+            width: '15rem',
+            
+        },
+        
     },
     carouselContainer: {    
-        marginLeft:  '15rem'
+        marginLeft:  '15rem',
+        [theme.breakpoints.down('md')]: {
+            marginLeft: '0rem',
+            height: '25rem'
+        }
+
     },
     space: {
-        margin: '0rem 15rem',
-        marginBottom: '10rem'
+        margin: "0 15rem 10rem 15rem",
+        [theme.breakpoints.down('sm')]: {
+            margin: "0 7rem 10rem 7rem",
+        },
+       
+
     },
     explore: {
         textTransform: 'none',
-        marginRight: '2rem'
+        marginRight: '2rem',
+        [theme.breakpoints.down('xs')] : {
+            fontSize: '3.5rem'
+        }
     },
     descriptionContainer: {
         textAlign: 'right',
-    }
+        [theme.breakpoints.down('md')]: {
+            textAlign: "center"
+        }
+    },
+
 
 }))
 
 export default function PromotionalProducts() {
     const classes = useStyles()
     const [selectedSlide, setSelectedSlide] = useState(0)
+    
+    const matchesMD = useMediaQuery(theme => theme.breakpoints.down('md'))
+    
 
     const data = useStaticQuery(graphql`
     query GetPromo {
@@ -82,10 +108,10 @@ export default function PromotionalProducts() {
   let slides = []
   
   data.allStrapiProduct.edges.map(({ node }, i) => slides.push(
-    {
+    { 
         key: i,
         content: (
-            <Grid container direction='column' alignItems='center'>
+            <Grid container direction="row" alignItems='center' justifyContent="center">
                 <Grid item>
                     <IconButton disableFocusRipple disableRipple 
                     onClick={() => setSelectedSlide(i)}
@@ -116,9 +142,10 @@ export default function PromotionalProducts() {
   console.log()
     return(
         <Grid container 
-        justifyContent='space-between'
+        justifyContent={matchesMD ? "space-around" : "space-between"}
         alignItems="center" 
         classes={{root: classes.mainContainer}}
+        direction={matchesMD ? "column" : "row"}
         >
             <Grid item classes={{root: classes.carouselContainer}}> 
                 <Carousel

@@ -8,6 +8,7 @@ import Chip from '@material-ui/core/Chip'
 
 import {useStaticQuery, graphql} from 'gatsby'
 import { makeStyles } from '@material-ui/core'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Rating from './Rating'
 
 import featuredAdornment from '../../images/featured-adornment.svg'
@@ -86,6 +87,8 @@ export default function FeaturedProducts(){
     const classes = useStyles()
     const [expanded, setExpended] = useState(null)
 
+    const matchesMD = useMediaQuery(theme => theme.breakpoints.down('md'))
+
     const data = useStaticQuery(graphql`
     query GetFeatured {
         allStrapiProduct(filter: {featured: {eq: true}}) {
@@ -108,7 +111,7 @@ export default function FeaturedProducts(){
         <Grid container direction="column" justifyContent="center" classes={{root: classes.background}}>
            {data.allStrapiProduct.edges.map(({node}, i) => {
             
-            const alignment = 
+            const alignment = matchesMD ? "center" :
             i === 0 || i  % 2 === 0 ? "flex-start" : "flex-end"
             
 

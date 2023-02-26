@@ -2,21 +2,34 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Lottie from 'react-lottie'
+import { useMediaQuery } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 
-import animationData from '../../images/data.json'
+import animationData from '../../images/sashacorp.json'
+
+const useStyles = makeStyles(theme => ({
+    textContainer: {
+        padding: "2rem"
+    }
+}))
 
 export default function HeroBlock() {
+    const matchesLG = useMediaQuery(theme => theme.breakpoints.down('lg'))
+    const matchesMD = useMediaQuery(theme => theme.breakpoints.down('md'))
+    const matchesXS = useMediaQuery(theme => theme.breakpoints.down('xs'))
+
+    const classes = useStyles()
     const defaultOptions = {
         loop: true,
-        autoplay: false,
+        autoplay: true,
         animationData: animationData
     }
 
     return (
-        <Grid container justifyContent="space-around" alignItems="center">
-          <Grid item>
+        <Grid container justifyContent="space-around" alignItems="center" >
+          <Grid item classes={{root: classes.textContainer}}>
              <Grid container direction="column">
-                <Grid item>
+                <Grid item >
                     <Typography variant="h1">
                         The First
                         <br/>
@@ -36,7 +49,11 @@ export default function HeroBlock() {
              </Grid>
           </Grid>
            <Grid item>
-             <Lottie isStopped options={defaultOptions} width="40rem"/>
+             <Lottie   
+             options={defaultOptions} 
+             width={matchesXS ? "25rem" : matchesMD ? "30rem" : matchesLG ? "35rem" : "40rem" }
+
+             />
            </Grid>
         </Grid>
     )
