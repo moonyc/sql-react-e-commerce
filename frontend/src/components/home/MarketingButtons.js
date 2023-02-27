@@ -53,7 +53,7 @@ export default function MarketingButtons() {
     useEffect(() => {
    
       window.addEventListener('resize', ( ) => {
-         if (window.innerWidth < 800) {
+         if (window.innerWidth < 820) {
           checkWidth(true)
           
          } else {

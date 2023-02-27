@@ -25,8 +25,16 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: '#fff'
     },
     logoText: {
-        color: theme.palette.common.offBlack
+        color: theme.palette.common.offBlack,
+        
+
     },
+    text: {
+      [theme.breakpoints.down('md')]: {
+        fontSize: '2rem'
+    }
+    },
+   
     tabs: {
         marginLeft: 'auto',
         marginRight: 'auto'
@@ -37,7 +45,8 @@ const useStyles = makeStyles(theme => ({
     },
     logoContainer: {
         [theme.breakpoints.down('md')]: {
-            marginRight: "auto"
+            marginRight: "auto",
+            
         }
     },
     drawer: {
@@ -103,8 +112,9 @@ function NavBar({ categories }) {
                    key={route.node.strapiId} 
                    component={Link} 
                    to={route.node.link || `/${route.node.name.toLowerCase()}`}
+                   
                    >
-                    <ListItemText primary={route.node.name} classes={{ primary: classes.listItemText}}/>
+                    <ListItemText primary={route.node.name} classes={{ primary: classes.listItemText}} key={route.node.strapiId + `1`}/>
                 </ListItem>
             ))}
           </List>
@@ -121,7 +131,7 @@ function NavBar({ categories }) {
         <AppBar color="transparent" elevation={0} position="static">
             <Toolbar>
                 <Button component={Link} to="/" classes={{ root: classes.logoContainer}}>
-                    <Typography variant="h1">
+                    <Typography variant="h1" classes={{root: classes.text}}>
                         <span className={ classes.logoText }>Sasha</span>corp
                     </Typography>
                 </Button>
