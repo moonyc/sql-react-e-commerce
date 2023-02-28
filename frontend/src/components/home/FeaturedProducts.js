@@ -24,11 +24,18 @@ const useStyles = makeStyles(theme => ({
     backgroundRepeat: 'no-repeat',
     width: '100%',
     height: '180rem',
-    padding: '0 2.5rem'
+    padding: '0 2.5rem',
+    [theme.breakpoints.down('md')]: {
+      height: "220rem"
+    }
     
    },
    featured: {
     width: '18rem',
+    [theme.breakpoints.down('md')]:
+    {
+      width: '16rem'
+    }
    },
    frame: {
     backgroundImage:  `url(${frame})`,
@@ -42,16 +49,22 @@ const useStyles = makeStyles(theme => ({
     boxSizing: 'border-box',
     boxShadow: theme.shadows[5],
     position: 'absolute',
-    zIndex: 1
-   },
+    zIndex: 1,
+    [theme.breakpoints.down('md')]: {
+      width: '17.8rem',
+      height: '18rem'
+    }
+  },
    slide: {
     backgroundColor: theme.palette.primary.main,
     height: '16.5rem',
-    width: '20.5rem',
+    width: '21.5rem',
     transition: 'transform 0.5s ease',
     zIndex: 0,
-    padding: '1rem 2rem'
-    
+    padding: '1rem 2rem',
+    [theme.breakpoints.down('md')]: {
+      width: '17.8rem'
+    }
    },
    slideLeft: {
      transform: 'translate(-21.5rem, 0rem)',
@@ -59,8 +72,14 @@ const useStyles = makeStyles(theme => ({
    },
    slideRight: {
      transform: 'translate(21.5rem, 0rem)'
-    
-   },
+  },
+  slideOnTop: {
+    zIndex: 2,
+  },
+  slideDown: {
+    transform: 'translate(0rem, 17.5rem)',
+    zIndex: 2
+  },
    productContainer: {
     margin: '5rem 0'
    },
@@ -108,7 +127,7 @@ export default function FeaturedProducts(){
       }`)
      
       return (
-        <Grid container direction="column" justifyContent="center" classes={{root: classes.background}}>
+        <Grid container direction="column" justifyContent={matchesMD ? 'space-between' : 'center'} classes={{root: classes.background}}>
            {data.allStrapiProduct.edges.map(({node}, i) => {
             
             const alignment = matchesMD ? "center" :
@@ -118,7 +137,10 @@ export default function FeaturedProducts(){
             return(
             <Grid item container justifyContent={alignment} key={node.strapiId} classes={{root: classes.productContainer}} alignItems="center">
                
-                <IconButton disableRipple  onClick={() => expanded === i ? setExpended(null) : setExpended(i)} classes={{root: classes.frame}}>
+                <IconButton 
+                disableRipple  
+                onClick={() => expanded === i ? setExpended(null) : setExpended(i)} 
+                classes={{root: classes.frame}}>
                     <img src={process.env.GATSBY_STRAPI_URL + 
                             node.variants[1].images[0].url} 
                             alt={node.name}
@@ -129,8 +151,10 @@ export default function FeaturedProducts(){
                 container
                 direction="column"
                 classes={{root: clsx(classes.slide, {
-                  [classes.slideLeft]: expanded === i && alignment === 'flex-end',
-                  [classes.slideRight]: expanded === i && alignment === 'flex-start'
+                  [classes.slideLeft]: !matchesMD && expanded === i && alignment === 'flex-end' ,
+                  [classes.slideRight]: !matchesMD &&  expanded === i && alignment === 'flex-start',
+                  //[classes.slideOnTop]: expanded === i && matchesMD && alignment === 'center'
+                  [classes.slideDown]: matchesMD && expanded === i && alignment === 'center'
                 })
                 }}
                 >

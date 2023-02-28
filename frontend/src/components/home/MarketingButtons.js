@@ -1,9 +1,10 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import clsx from 'clsx'
 import Grid from '@material-ui/core/Grid'
-import { Typography } from '@material-ui/core'
+import { IconButton, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { Link } from 'gatsby'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 import featuredAdornment from '../../images/featured-adornment-2.svg'
 import store from '../../images/store.svg'
@@ -21,17 +22,33 @@ const useStyles = makeStyles(theme => ({
     transition: 'transform 0.5s ease',
     "&:hover" : {
       transform: 'scale(1.1)'
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: '12rem'
     }
 
    },
    text: {
     color: theme.palette.primary.main,
+    [theme.breakpoints.down('md')]: {
+      fontSize: '3.5rem'
+    },
+    [theme.breakpoints.down('sm')]:{
+      fontSize: '2.5rem'
+    }
    },
    textW: {
     color: "#fff"
    },
    image: {
-    height: '11.25rem'
+    height: '14.25rem',
+    [theme.breakpoints.down('md')]: {
+      height: '13.25rem'
+    },
+    [theme.breakpoints.down('sm')]:
+    {
+      height: '9.25rem'
+    }
    },
    container: {
     margin: '0rem 0',
@@ -47,31 +64,16 @@ const useStyles = makeStyles(theme => ({
 
 export default function MarketingButtons() {
     const classes = useStyles()
-    const [trigger, checkWidth] = useState(false)
-    
-
-    useEffect(() => {
-   
-      window.addEventListener('resize', ( ) => {
-         if (window.innerWidth < 820) {
-          checkWidth(true)
-          
-         } else {
-          checkWidth(false)
-          
-         }
-      })
-      
-      
-    })
-
+   const matchesMD = useMediaQuery(theme => theme.breakpoints.down('md'))
+   const matchesSM = useMediaQuery(theme => theme.breakpoints.down('sm'))
+ 
     const buttons = [
         {label:'Store',icon:store, dIcon: darkStore, link:'/hoodies', textColor:"white"},
         {label:"More by us", icon:moreByUs, dIcon:moreByUs,  href: 'https://www.google.com', textColor:"black" }
     ]
 
     return(
-      <Grid container justifyContent="space-between" alignItems="center" classes={{root: classes.container}}>
+      <Grid container direction={matchesMD ? 'column' : 'row'} justifyContent={matchesMD ? 'center' : 'space-between'} alignItems="center" classes={{root: classes.container}}>
         {buttons.map((button) => (
             <Grid item >
               <Grid 
@@ -85,13 +87,15 @@ export default function MarketingButtons() {
               href={button.href ? button.href : undefined}
               >
                  <Grid item>
-                  <img src={trigger === false ? button.icon : button.dIcon} 
+                 <IconButton disableRipple disableFocusRipple disableTouchRipple>
+                  <img src={matchesMD ? button.dIcon : button.icon} 
                   alt={button.label} 
                   className={classes.image}/>
+                  </IconButton>
                 </Grid>
                 <Grid item>
                   <Typography variant="h1" classes={{root: clsx(classes.text, {
-                    [classes.textW]: button.textColor === 'white' && trigger === false 
+                    [classes.textW]: !matchesSM && button.textColor === 'white' 
   
                   })}}>
                     {button.label}

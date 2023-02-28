@@ -16,6 +16,7 @@ const useStyles = makeStyles(theme => ({
 export default function HeroBlock() {
     const matchesLG = useMediaQuery(theme => theme.breakpoints.down('lg'))
     const matchesMD = useMediaQuery(theme => theme.breakpoints.down('md'))
+    const matchesSM = useMediaQuery(theme => theme.breakpoints.down('sm'))
     const matchesXS = useMediaQuery(theme => theme.breakpoints.down('xs'))
 
     const classes = useStyles()
@@ -51,7 +52,7 @@ export default function HeroBlock() {
            <Grid item>
              <Lottie   
              options={defaultOptions} 
-             width={matchesXS ? "25rem" : matchesMD ? "30rem" : matchesLG ? "35rem" : "40rem" }
+             width={matchesXS ? "20rem" : matchesSM ? "25rem" : matchesMD ? "30rem" : matchesLG ? "35rem" : "40rem" }
 
              />
            </Grid>

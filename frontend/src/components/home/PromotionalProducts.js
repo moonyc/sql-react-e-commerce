@@ -24,6 +24,9 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down('md')]: {
             padding: '20rem 5rem 5rem 5rem'
         },
+        [theme.breakpoints.down('sm')]: {
+            padding: '15rem 1rem 1rem 1rem'
+        },
     },
     productName: {
         color: '#fff'
@@ -45,6 +48,9 @@ const useStyles = makeStyles(theme => ({
             width: '15rem',
             
         },
+        [theme.breakpoints.down('xs')]: {
+            width: '10rem'
+        }
         
     },
     carouselContainer: {    
@@ -52,13 +58,24 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down('md')]: {
             marginLeft: '0rem',
             height: '25rem'
+        },
+        [theme.breakpoints.down('sm')]: {
+            height: '13rem',
+            
         }
+        
 
     },
     space: {
         margin: "0 15rem 10rem 15rem",
         [theme.breakpoints.down('sm')]: {
             margin: "0 7rem 10rem 7rem",
+        },
+        [theme.breakpoints.down('sx')]: {
+            margin: "0 2rem 4rem 2rem",
+        },
+        [theme.breakpoints.down('sx')]: {
+            margin: "0 0rem 1rem 0rem",
         },
        
 
@@ -67,7 +84,7 @@ const useStyles = makeStyles(theme => ({
         textTransform: 'none',
         marginRight: '2rem',
         [theme.breakpoints.down('xs')] : {
-            fontSize: '3.5rem'
+            fontSize: '2rem'
         }
     },
     descriptionContainer: {
@@ -76,6 +93,7 @@ const useStyles = makeStyles(theme => ({
             textAlign: "center"
         }
     },
+    
 
 
 }))
@@ -149,6 +167,7 @@ export default function PromotionalProducts() {
         >
             <Grid item classes={{root: classes.carouselContainer}}> 
                 <Carousel
+                
                 slides={slides}
                 goToSlide={selectedSlide}
                 />
@@ -161,7 +180,7 @@ export default function PromotionalProducts() {
                 <Typography variant="h4" classes={{root: classes.explore}}>
                     Explore
                 </Typography>
-                <img src={explore} alt="go to the product page"/>
+                <img src={explore} alt="go to the product page" className={classes.img}/>
              </Button>
             </Grid>
         </Grid>

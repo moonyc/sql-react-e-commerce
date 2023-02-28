@@ -30,9 +30,16 @@ const useStyles = makeStyles(theme => ({
 
     },
     text: {
-      [theme.breakpoints.down('md')]: {
+        [theme.breakpoints.down('lg')]:{
+            fontSize: '2.6rem'
+        },
+
+        [theme.breakpoints.down('md')]: {
         fontSize: '2rem'
-    }
+       },
+       [theme.breakpoints.down('xs')]: {
+        fontSize: '1.5rem'
+       }
     },
    
     tabs: {
