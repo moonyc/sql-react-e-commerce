@@ -10,7 +10,6 @@ import { makeStyles, useTheme } from "@material-ui/core/styles"
 import validate from "../components/ui/validate"
 import { useMediaQuery } from '@material-ui/core'
 
-import { Link } from 'gatsby'
 
 import address from '../images/address.svg'
 
@@ -253,7 +252,7 @@ const ContactPage = () => {
                   setErrors({...errors, [field]: !valid[field] })
                 }
               return (
-                <Grid item classes={{root: field === "message" ? classes.multilineContainer : classes.fieldContainer}}>
+                <Grid item key={field} classes={{root: field === "message" ? classes.multilineContainer : classes.fieldContainer}}>
                   <TextField 
                   value={values[field]}
                   onChange={event => {
@@ -273,7 +272,7 @@ const ContactPage = () => {
                   rows={field === "message" ? 8 : undefined}
                   InputProps={{classes: {input: classes.input, ...fields[field].inputClasses},
                    disableUnderline: field === "message",
-                   startAdornment: (
+                   startAdornment: field === "message" ? undefined :(
                     <InputAdornment position="start">
                         {fields[field].adornment}
                     </InputAdornment>
@@ -305,6 +304,7 @@ const ContactPage = () => {
                 {info.map((section, index) => (
                   <Grid item 
                   container 
+                  key={section.label}
                   alignItems="center" 
                   classes={{root: index === 1 ? classes.middleInfo : undefined}}>
                    <Grid item  classes={{root: classes.iconContainer}}>
