@@ -45,6 +45,16 @@
       "relation": "manyToOne",
       "target": "api::product.product",
       "inversedBy": "variants"
+    },
+    "colorLabel": {
+      "type": "enumeration",
+      "enum": [
+        "White",
+        "Blue",
+        "Purple",
+        "Green",
+        "Yellow "
+      ]
     }
   }
 }

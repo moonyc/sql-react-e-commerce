@@ -12,6 +12,7 @@ import promoAdornment from '../../images/promo-adornment.svg'
 import explore from '../../images/explore.svg'
 
 
+
 const useStyles = makeStyles(theme => ({
     mainContainer: {
         backgroundImage: `url(${promoAdornment})`,
