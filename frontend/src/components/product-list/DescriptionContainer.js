@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import clsx from 'cslx'
+import clsx from 'clsx'
 import { Grid } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 import ButtonGroup from '@material-ui/core/ButtonGroup'

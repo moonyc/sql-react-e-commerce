@@ -13,7 +13,8 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 10,
     width: '95%',
     minHeight: '15rem',
-    height: 'auto'
+    height: 'auto',
+    marginBottom: '3rem'
    }
 }))
 
