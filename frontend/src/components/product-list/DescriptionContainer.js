@@ -11,17 +11,20 @@ import ListIcon from '../../images/List'
 import GridIcon from '../../images/Grid'
 
 const useStyles = makeStyles(theme => ({
+    
    description: {
     color: '#fff'
    },
    mainContainer:  {
-    padding: '3rem',
+    padding: '2rem',
     backgroundImage: `url(${background})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat'
+    backgroundRepeat: 'no-repeat',
+    position: 'relative'
 
    },
+
    descriptionContainer: {
     backgroundColor: theme.palette.primary.main,
     height: '15rem',
@@ -30,13 +33,34 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 10,
     boxShadow: theme.shadows[1]
    },
+   buttonGroupContainer: {
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    marginRight: '2.7rem',
+    marginBottom: '3rem'
+},
    button: {
-    border: `2px solid #fff`,
-    borderRightColor: `#fff !important`,
+    padding: '0.5rem 1.3rem',
+    border: `2px solid  ${theme.palette.secondary.main}`,
+    borderRightColor: `${theme.palette.secondary.main} !important`,
     borderRadius: 25,
+    backgroundColor: theme.palette.primary.main,
+
+    "&:hover":{
+        backgroundColor: theme.palette.secondary.main
+    },
+    
    },
    selected: {
-    backgroundColor: theme.palette.secondary.main
+    border: `2px solid ${theme.palette.secondary.main}`,
+    borderRightColor: `${theme.palette.secondary.main} !important`,
+    backgroundColor: theme.palette.secondary.main,
+    "&:hover":{
+        backgroundColor: theme.palette.secondary.main
+    },
+    
+    
    }
 }))
 
@@ -54,14 +78,14 @@ export default function DescriptionContainer({name, description}) {
                   {description}
               </Typography>
            </Grid>
-           <Grid item>
+           <Grid item classes={{root: classes.buttonGroupContainer}}>
             <ButtonGroup>
                 <Button 
                 onClick={() => setLayout("list")}
                 classes={{root: clsx(classes.button, {
                     [classes.selected]: layout === "list"
                 })}}>
-                    <ListIcon/>
+                    <ListIcon color={layout === "list" ? "#fff": undefined}/>
                 </Button>
                 <Button 
                 onClick={() => setLayout("grid")}
@@ -70,7 +94,7 @@ export default function DescriptionContainer({name, description}) {
                     [classes.selected]: layout === "grid"
                 }),
                 }}>
-                    <GridIcon />
+                    <GridIcon color={layout === "grid" ? "#fff": undefined} />
                 </Button>
             </ButtonGroup>
            </Grid>

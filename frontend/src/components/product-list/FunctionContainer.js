@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import Sort from './Sort'
 import Filter from './Filter'
@@ -18,9 +17,9 @@ const useStyles = makeStyles(theme => ({
    },
 }))
 
-export default function FunctionContainer({ filterOptions }) {
+export default function FunctionContainer({ filterOptions, option, setOption }) {
     const classes = useStyles()
-    const [option, setOption] = useState(null)
+    
 
     const content = () => {
         switch (option) {
