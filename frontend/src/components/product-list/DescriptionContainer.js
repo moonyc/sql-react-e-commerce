@@ -36,18 +36,18 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 25,
    },
    selected: {
-    backgroundColor: theme.palette.primary.main
+    backgroundColor: theme.palette.secondary.main
    }
 }))
 
 export default function DescriptionContainer({name, description}) {
     const classes = useStyles()
     const [layout, setLayout] = useState("grid")
- 
+   console.log(layout)
     return(
         <Grid item container classes={{root: classes.mainContainer}} justifyContent="center">
            <Grid item classes={{root: classes.descriptionContainer}}>
-              <Typography align="center" variant="h4" paragraph gutterButton>
+              <Typography align="center" variant="h4" paragraph gutterbutton="true">
                  {name}
               </Typography>
               <Typography align="center"  variant="body1" classes={{root: classes.description}}>
@@ -56,14 +56,20 @@ export default function DescriptionContainer({name, description}) {
            </Grid>
            <Grid item>
             <ButtonGroup>
-                <Button classes={{outlined: clsx(classes.button, {
+                <Button 
+                onClick={() => setLayout("list")}
+                classes={{root: clsx(classes.button, {
                     [classes.selected]: layout === "list"
                 })}}>
                     <ListIcon/>
                 </Button>
-                <Button classes={{outlined: clsx(classes.button, {
+                <Button 
+                onClick={() => setLayout("grid")}
+                classes={{
+                    root: clsx(classes.button, {
                     [classes.selected]: layout === "grid"
-                })}}>
+                }),
+                }}>
                     <GridIcon />
                 </Button>
             </ButtonGroup>
