@@ -13,12 +13,12 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.main,
     minHeight: '5rem',
     height: 'auto',
-    borderRadius: '1px 1px 0px 0px'
+    borderRadius: ({ option }) => option !== null  ? '10px' : '10px 10px 0px 0px'
    },
 }))
 
 export default function FunctionContainer({ filterOptions, option, setOption }) {
-    const classes = useStyles()
+    const classes = useStyles({option: option})
     
 
     const content = () => {

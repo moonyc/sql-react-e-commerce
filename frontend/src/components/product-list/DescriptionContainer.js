@@ -21,7 +21,8 @@ const useStyles = makeStyles(theme => ({
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-    position: 'relative'
+    position: 'relative',
+    borderRadius: "0px 0px 10px 10px"
 
    },
 
