@@ -156,6 +156,7 @@ function NavBar({ categories }) {
                     className={classes.icon}
                     src={action.icon} 
                     alt={action.alt} 
+                    key={action.alt + 'gattini'}
                     />
                     </IconButton>
                     )}

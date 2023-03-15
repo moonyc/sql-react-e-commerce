@@ -4,9 +4,9 @@ import Grid from '@material-ui/core/Grid'
 import Layout from '../components/ui/layout'
 import DynamicToolbar from '../components/product-list/DynamicToolbar'
 
-export default function ProductLists({ pageContext: { filterOptions, name, description} },
-   data) {
-      console.log(data)
+export default function ProductLists({ pageContext: { filterOptions, name, description},
+   data}) {
+     console.log(data)
    return(
       <Layout>
          <Grid container direction="column" alignItems="center">
@@ -22,16 +22,16 @@ export default function ProductLists({ pageContext: { filterOptions, name, descr
 
 
 export const query = graphql`
-query GetCategoryProducts($id: String!) {
-  allStrapiProduct(filter: {category: {id: {eq: $id}}}) {
+query GetCategoryProducts($strapiId: Int!) {
+  allStrapiProduct(filter: {category: {strapi_id: {eq: $strapiId}}}) {
     edges {
       node {
         strapi_id
+        id
         name
         variants {
           color
           id
-          price
           size
           style
           images {

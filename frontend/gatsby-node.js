@@ -22,6 +22,7 @@ exports.createPages = async ({ graphql, actions}) => {
                 node {
                   strapi_id
                   name
+                  id
                   description
                   filterOptions {
                     Size {
@@ -70,7 +71,8 @@ exports.createPages = async ({ graphql, actions}) => {
         context: {
             name: category.node.name,
             description: category.node.description,
-            id: category.node.strapi_id,
+            strapiId: category.node.strapi_id,
+            id: category.node.id,
             filterOptions: category.node.filterOptions
         }
     })
