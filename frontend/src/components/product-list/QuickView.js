@@ -102,7 +102,7 @@ export default function QuickView( {open, setOpen, url, name, price, product}) {
                <Grid item>
                  <Grid container direction="column">
                    <Grid item>
-                     <Sizes sizes={sizes}/>
+                    <Sizes sizes={sizes} />
                    </Grid>
                  </Grid>
                </Grid>

@@ -15,17 +15,18 @@ export default function Sizes({ sizes }) {
 
     const possibleSizes = ["S", "M", "L"]
     var actualSizes = []
+    
 
   if (possibleSizes.every(size => sizes.includes(size))) {
     actualSizes = possibleSizes
   } 
-
+  console.log(actualSizes)
     return (
         <Grid item container justifyContent="space-between">
              {actualSizes.map(size => (
                 <Grid item key={size}>
                    <Button>
-                      <Typography variant="h3" clases={{root: classes.size}}>
+                      <Typography variant="h3" classes={{root: classes.size}}>
                         {size}
                       </Typography>
                    </Button>
