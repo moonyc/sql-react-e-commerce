@@ -38,6 +38,7 @@ query GetCategoryProducts($strapiId: Int!) {
           id
           size
           style
+          price
           images {
             url
           }
