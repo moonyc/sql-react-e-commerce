@@ -67,7 +67,6 @@ export default function QuickView( {open, setOpen, url, name, price, product}) {
     var sizes=[]
     product.node.variants.map(variant => sizes.push(variant.size))
 
-    console.log(sizes)
     return(
      <Dialog classes={{ paper: classes.dialog }}open={open} onClose={() => setOpen(false)}>
         <DialogContent classes={{root: classes.selectedFrame}}> 

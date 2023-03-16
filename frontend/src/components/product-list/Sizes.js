@@ -13,10 +13,17 @@ const useStyles = makeStyles(theme => ({
 export default function Sizes({ sizes }) {
     const classes = useStyles()
 
+    const possibleSizes = ["S", "M", "L"]
+    var actualSizes = []
+
+  if (possibleSizes.every(size => sizes.includes(size))) {
+    actualSizes = possibleSizes
+  } 
+
     return (
         <Grid item container justifyContent="space-between">
-             {sizes.map(size => (
-                <Grid item>
+             {actualSizes.map(size => (
+                <Grid item key={size}>
                    <Button>
                       <Typography variant="h3" clases={{root: classes.size}}>
                         {size}
