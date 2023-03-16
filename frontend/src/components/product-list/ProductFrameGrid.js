@@ -55,7 +55,7 @@ export default function ProductFrameGrid({ product, variant}) {
                   </Typography>
                </Grid>
            </Grid>
-           <QuickView open={open} setOpen={setOpen} url={imgURL} name={productName} price={variant.price}/>
+           <QuickView open={open} setOpen={setOpen} url={imgURL} name={productName} price={variant.price} product={product}/>
        </Grid>
     )
 }
