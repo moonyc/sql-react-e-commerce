@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography  from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
@@ -8,8 +8,11 @@ import DialogContent from '@material-ui/core/DialogContent'
 import { makeStyles } from '@material-ui/core/styles'
 import Rating from '../home/Rating'
 import Sizes from './Sizes'
+import Swatches from './Swatches'
+
 import frame from '../../images/frame.svg'
 import explore from '../../images/explore.svg'
+import QtyButton from './QtyButton'
 
 const useStyles = makeStyles(theme => ({
    selectedFrame: {
@@ -31,11 +34,12 @@ const useStyles = makeStyles(theme => ({
   toolbar: {
     backgroundColor: theme.palette.primary.main,
     height: '12.7rem',
+    padding: '0.5rem 1rem'
     
   },
   infoContainer: {
     height: '100%',
-    padding: '0 1rem'
+    
   },
   stock: {
     color: '#fff'
@@ -63,9 +67,18 @@ const useStyles = makeStyles(theme => ({
 
 export default function QuickView( {open, setOpen, url, name, price, product}) {
     const classes = useStyles()
+    const [selectedSize, setSelectedSize] = useState(null)
+    const [selectedColor, setSelectedColor] = useState(null)
 
     var sizes=[]
-    product.node.variants.map(variant => sizes.push(variant.size))
+    var colors= []
+    product.node.variants.map(variant => {
+        sizes.push(variant.size)
+        colors.push(variant.color)
+        return null
+    })
+
+    
 
     return(
      <Dialog classes={{ paper: classes.dialog }}open={open} onClose={() => setOpen(false)}>
@@ -74,7 +87,7 @@ export default function QuickView( {open, setOpen, url, name, price, product}) {
             <Grid item>
                 <img src={url} alt="product" className={classes.productImage}/>
             </Grid>
-            <Grid item container classes={{root: classes.toolbar}}>
+            <Grid item container justifyContent="space-between" classes={{root: classes.toolbar}}>
                <Grid item>
                 <Grid container direction="column" justifyContent="space-between" classes={{root: classes.infoContainer}}>
                    <Grid item>
@@ -101,9 +114,10 @@ export default function QuickView( {open, setOpen, url, name, price, product}) {
                </Grid>
                <Grid item>
                  <Grid container direction="column">
-                   <Grid item>
-                    <Sizes sizes={sizes} />
-                   </Grid>
+                   
+                    <Sizes sizes={sizes}  selectedSize={selectedSize} setSelectedSize={setSelectedSize} />
+                    <Swatches colors={colors} selectedColor={selectedColor} setSelectedColor={setSelectedColor}/>
+                    <QtyButton />
                  </Grid>
                </Grid>
             </Grid>
