@@ -1,19 +1,48 @@
-import React, { useState } from 'react'
+import React, { useState, useRef} from 'react'
 import { graphql } from 'gatsby'
+import Pagination from '@material-ui/lab/Pagination'
+import { Fab } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
-
+import { makeStyles } from '@material-ui/core/styles'
 import Layout from '../components/ui/layout'
 import DynamicToolbar from '../components/product-list/DynamicToolbar'
 import ListOfProducts from '../components/product-list/ListOfProducts'
+
+const useStyles = makeStyles(theme =>({
+   fab: {
+    alignSelf: 'flex-end',
+    marginRight: '2rem',
+    marginBottom: '2rem',
+    color: '#fff',
+    fontFamily: 'Montserrat',
+    fontSize: '4rem',
+    width: '4rem',
+    height: '4rem'
+   }
+}))
 
 export default function ProductLists({ pageContext: { filterOptions, name, description},
    data: { allStrapiProduct: { edges: products },
   },
 }) {
+   const classes = useStyles()
    const [layout, setLayout] = useState("grid") 
+   const [page, setPage] = useState(1)
+   const scrollRef = useRef(null)
+
+   const scroll = () => {
+    scrollRef.current.scrollIntoView({ behavior: 'smooth'})
+   }
+
+   const productsPerPage = layout === 'grid' ? 8 : 4
+   var numberOfVariants = 0
+   products.map(product => numberOfVariants += product.node.variants.length)
+
+   const numberOfPages = Math.ceil( numberOfVariants / productsPerPage )
    return(
       <Layout>
          <Grid container direction="column" alignItems="center">
+         <div ref={scrollRef}/>
             <DynamicToolbar 
             filterOptions={filterOptions}
             name={name}
@@ -21,7 +50,11 @@ export default function ProductLists({ pageContext: { filterOptions, name, descr
             layout={layout}
             setLayout={setLayout}
             />
-            <ListOfProducts layout={layout} products={products}/>
+            <ListOfProducts page={page} productsPerPage={productsPerPage} layout={layout} products={products}/>
+            <Pagination count={numberOfPages} page={page} onChange={(event, newPage) => setPage(newPage)} />
+            <Fab onClick={scroll} color="primary" classes={{root: classes.fab}}>
+              ^
+            </Fab>
          </Grid>
       </Layout>
     

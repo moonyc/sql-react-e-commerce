@@ -35,7 +35,7 @@ export default function Sizes({ sizes, selectedSize, setSelectedSize}) {
   if (possibleSizes.every(size => sizes.includes(size))) {
     actualSizes = possibleSizes
   } 
-  console.log(actualSizes)
+  
     return (
         <Grid item container justifyContent="space-between">
              {actualSizes.map(size => (

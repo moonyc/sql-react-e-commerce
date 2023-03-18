@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function ListOfProducts({ products, layout}) {
+export default function ListOfProducts({ products, layout, page, productsPerPage}) {
     const classes = useStyles({ layout })
 
 
@@ -36,7 +36,8 @@ export default function ListOfProducts({ products, layout}) {
             return null
         })
     
-         return <Frame 
+         return (
+         <Frame 
          sizes={sizes} 
          colors={colors} 
          selectedColor={selectedColor}
@@ -45,16 +46,22 @@ export default function ListOfProducts({ products, layout}) {
          setSelectedColor={setSelectedColor}
          variant={variant} 
          product={product} />
+         )
     }
-
+    
+    var content = []
+    products.map((product, index) => product.node.variants.map(variant => content.push({ product: index, variant: variant})))
     return (
        <Grid item container classes={{root: classes.productContainer}} >
-           {products.map(product =>(
-            product.node.variants.map(variant => (
-                <FrameHelper Frame={layout === 'grid' ? ProductFrameGrid : ProductFrameList} key={variant.id} variant={variant} product={product}/>
+           {content.slice((page - 1) * productsPerPage, page * productsPerPage).map(item => (
+                <FrameHelper 
+                Frame={layout === 'grid' ? ProductFrameGrid : ProductFrameList}
+                key={item.variant.id}
+                variant={item.variant}
+                product={products[item.product]}/>
 
             ))
-           ))}
+           }
        </Grid>
     )
 }
