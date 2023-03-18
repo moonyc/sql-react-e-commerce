@@ -12,7 +12,7 @@ import cart from '../../images/cartWhite.svg'
 const useStyles = makeStyles(theme => ({
    mainGroup: {
      height: '3rem',
-     marginTop: '2rem'
+    
    },
    qtyText: {
     color: '#fff'

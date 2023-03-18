@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import Grid from '@material-ui/core/Grid'
 
@@ -7,17 +7,21 @@ import DynamicToolbar from '../components/product-list/DynamicToolbar'
 import ListOfProducts from '../components/product-list/ListOfProducts'
 
 export default function ProductLists({ pageContext: { filterOptions, name, description},
-   data: { allStrapiProduct: { edges: products }}}) 
-   {
-     
+   data: { allStrapiProduct: { edges: products },
+  },
+}) {
+   const [layout, setLayout] = useState("grid") 
    return(
       <Layout>
          <Grid container direction="column" alignItems="center">
             <DynamicToolbar 
             filterOptions={filterOptions}
             name={name}
-            description={description}/>
-            <ListOfProducts products={products}/>
+            description={description}
+            layout={layout}
+            setLayout={setLayout}
+            />
+            <ListOfProducts layout={layout} products={products}/>
          </Grid>
       </Layout>
     

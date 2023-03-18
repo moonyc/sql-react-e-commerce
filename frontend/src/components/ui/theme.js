@@ -7,6 +7,7 @@ const lightGreen = "#C1DEAE"
 const green = "#219F94"
 const offBlack = "#404258"
 const grey = "#747474"
+const framePurple = "#404258"
 
 const theme = createTheme({
  palette: {
@@ -20,7 +21,8 @@ const theme = createTheme({
     tan,
     lightGreen,
     green,
-    offBlack
+    offBlack,
+    framePurple
     
    }
  },

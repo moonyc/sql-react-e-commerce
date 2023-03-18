@@ -35,7 +35,16 @@ const useStyles = makeStyles(theme => ({
    }
 }))
 
-export default function ProductFrameGrid({ product, variant}) {
+export default function ProductFrameGrid({ 
+    product, 
+    variant,
+    selectedSize,
+    selectedColor,
+    setSelectedSize,
+    setSelectedColor,
+    sizes,
+    colors
+}) {
     const classes = useStyles()
     const [open, setOpen] = useState(false)
     
@@ -55,7 +64,20 @@ export default function ProductFrameGrid({ product, variant}) {
                   </Typography>
                </Grid>
            </Grid>
-           <QuickView open={open} setOpen={setOpen} url={imgURL} name={productName} price={variant.price} product={product}/>
+           <QuickView 
+           open={open} 
+           setOpen={setOpen} 
+           url={imgURL} 
+           name={productName}
+           price={variant.price} 
+           product={product}
+           sizes={sizes} 
+           colors={colors} 
+           selectedColor={selectedColor}
+           selectedSize={selectedSize} 
+           setSelectedSize={setSelectedSize}
+        setSelectedColor={setSelectedColor}
+           />
        </Grid>
     )
 }

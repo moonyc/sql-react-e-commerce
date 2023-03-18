@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography  from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
@@ -62,22 +62,29 @@ const useStyles = makeStyles(theme => ({
   },
   chipRoot: {
     transform: "scale(1.5)"
+  },
+  quantityContainer: {
+    marginTop: '2rem'
   }
 }))
 
-export default function QuickView( {open, setOpen, url, name, price, product}) {
+export default function QuickView( {
+  open, 
+  setOpen, 
+  url, 
+  name, 
+  price, 
+  product,
+  sizes,
+  colors,
+  selectedSize,
+  selectedColor,
+  setSelectedColor,
+  setSelectedSize
+
+}) {
     const classes = useStyles()
-    const [selectedSize, setSelectedSize] = useState(null)
-    const [selectedColor, setSelectedColor] = useState(null)
-
-    var sizes=[]
-    var colors= []
-    product.node.variants.map(variant => {
-        sizes.push(variant.size)
-        colors.push(variant.color)
-        return null
-    })
-
+   
     
 
     return(
@@ -117,7 +124,9 @@ export default function QuickView( {open, setOpen, url, name, price, product}) {
                    
                     <Sizes sizes={sizes}  selectedSize={selectedSize} setSelectedSize={setSelectedSize} />
                     <Swatches colors={colors} selectedColor={selectedColor} setSelectedColor={setSelectedColor}/>
+                    <span className={classes.quantityContainer}>
                     <QtyButton />
+                    </span>
                  </Grid>
                </Grid>
             </Grid>

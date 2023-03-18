@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import clsx from 'clsx'
 import { Grid } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
@@ -65,9 +65,9 @@ const useStyles = makeStyles(theme => ({
    }
 }))
 
-export default function DescriptionContainer({name, description}) {
+export default function DescriptionContainer({name, description, layout, setLayout}) {
     const classes = useStyles()
-    const [layout, setLayout] = useState("grid")
+    
    console.log(layout)
     return(
         <Grid item container classes={{root: classes.mainContainer}} justifyContent="center">
