@@ -80,7 +80,7 @@ export default function QtyButton() {
                     </Button>
                  </ButtonGroup>
                  <Button classes={{root: clsx(classes.endButton, classes.cartButton)}}>
-                    <Badge overlap="circle" badgeContent="+" classes={{badge: classes.badge}}>
+                    <Badge overlap="circular" badgeContent="+" classes={{badge: classes.badge}}>
                       <img src={cart} alt="cart" className={classes.cartIcon}/>
                     </Badge>
                     

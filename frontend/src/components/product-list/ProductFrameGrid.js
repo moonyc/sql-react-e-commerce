@@ -1,4 +1,5 @@
 import React, { useState} from 'react'
+import clsx from 'clsx'
 import Grid from '@material-ui/core/Grid'
 import  Typography  from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
@@ -31,6 +32,9 @@ const useStyles = makeStyles(theme => ({
     marginRight: 'calc((100% -(25rem * 4)) / 3)',
     ":nth-child(4n)": {
         marginRight: 0
+    },
+    invisibility: {
+        visibility: 'hidden'
     }
    }
 }))
@@ -47,11 +51,15 @@ export default function ProductFrameGrid({
 }) {
     const classes = useStyles()
     const [open, setOpen] = useState(false)
+
+   
     
     const imgURL = process.env.GATSBY_STRAPI_URL + variant.images[0].url
     const productName = product.node.name.split(" ")[0]
     return (
-       <Grid item>
+       <Grid item classes={{root: clsx({
+        [classes.invisibility]: open === true
+       })}}>
            <Grid container direction="column" alignItems="center" onClick={() => setOpen(true)}>
                <Grid item classes={{root: classes.frame}}>
                 <img src={imgURL}
@@ -59,7 +67,7 @@ export default function ProductFrameGrid({
                     className={classes.product} />
                </Grid>
                <Grid item classes={{root: classes.title}}>
-                  <Typography variant="h5">
+                  <Typography variant="h5" >
                     {productName}
                   </Typography>
                </Grid>
