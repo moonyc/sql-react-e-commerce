@@ -65,8 +65,20 @@ const useStyles = makeStyles(theme => ({
    }
 }))
 
-export default function DescriptionContainer({name, description, layout, setLayout}) {
+export default function DescriptionContainer({
+    name, 
+    description, 
+    layout, 
+    setLayout,
+    setPage
+
+}) {
     const classes = useStyles()
+
+    const changeLayout = (option) => {
+       setPage(1)
+       setLayout(option)
+    }
     
    console.log(layout)
     return(
@@ -82,14 +94,14 @@ export default function DescriptionContainer({name, description, layout, setLayo
            <Grid item classes={{root: classes.buttonGroupContainer}}>
             <ButtonGroup>
                 <Button 
-                onClick={() => setLayout("list")}
+                onClick={() => changeLayout("list")}
                 classes={{root: clsx(classes.button, {
                     [classes.selected]: layout === "list"
                 })}}>
                     <ListIcon color={layout === "list" ? "#fff": undefined}/>
                 </Button>
                 <Button 
-                onClick={() => setLayout("grid")}
+                onClick={() => changeLayout("grid")}
                 classes={{
                     root: clsx(classes.button, {
                     [classes.selected]: layout === "grid"

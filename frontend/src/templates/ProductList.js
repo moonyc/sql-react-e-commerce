@@ -18,6 +18,22 @@ const useStyles = makeStyles(theme =>({
     fontSize: '4rem',
     width: '4rem',
     height: '4rem'
+   },
+   pagination: {
+    alignSelf: 'flex-end',
+    marginRight: "2%",
+    marginTop: '-3rem',
+    marginBottom: '4rem'
+   },
+   "@global" : {
+    '.MuiPaginationItem-root': {
+      fontFamily: 'Montserrat',
+      fontSize: '1rem',
+      color: theme.palette.primary.main,
+      "&.Mui-selected": {
+        color: '#fff'
+      }
+    }
    }
 }))
 
@@ -49,9 +65,16 @@ export default function ProductLists({ pageContext: { filterOptions, name, descr
             description={description}
             layout={layout}
             setLayout={setLayout}
+            setPage={setPage}
             />
             <ListOfProducts page={page} productsPerPage={productsPerPage} layout={layout} products={products}/>
-            <Pagination count={numberOfPages} page={page} onChange={(event, newPage) => setPage(newPage)} />
+            <Pagination 
+            color="primary" 
+            count={numberOfPages} 
+            page={page} 
+            onChange={(event, newPage) => setPage(newPage)} 
+            classes={{root: classes.pagination}}
+            />
             <Fab onClick={scroll} color="primary" classes={{root: classes.fab}}>
               ^
             </Fab>
