@@ -9,6 +9,8 @@ import Sizes from './Sizes'
 import Swatches from './Swatches'
 import QtyButton from './QtyButton'
 
+import { colorIndex } from './ProductFrameGrid'
+
 const useStyles = makeStyles(theme => ({
   frame: {
     backgroundColor: theme.palette.common.framePurple,
@@ -46,12 +48,15 @@ export default function ProductFrameList({
 }) {
     const classes = useStyles()
 
-    
+    const imageIndex = colorIndex(product, selectedColor)
+
+    const images = imageIndex !== -1 ? product.node.variants[imageIndex].images 
+    : variant.images
 
     return (
         <Grid item container>
             <Grid item xs={9} container classes={{root: classes.frame}} alignItems="center" justifyContent="space-around">
-                {variant.images.slice(0, 4).map(image => (
+                {images.slice(0, 4).map(image => (
                     <>
                     <Grid item key={image.url}>
                        <img  className={classes.productImage} src={process.env.GATSBY_STRAPI_URL + image.url} alt={image.url}/>
