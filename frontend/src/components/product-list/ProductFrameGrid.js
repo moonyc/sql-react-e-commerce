@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
    frame: {
     backgroundImage: `url(${frame})`,
     backgroundPosition: 'center',
-    backgroundSize: 'contain',
+    backgroundSize: "contain",
     backgroundRepeat: 'no-repeat',
     height: '25rem',
     width: '25rem',
