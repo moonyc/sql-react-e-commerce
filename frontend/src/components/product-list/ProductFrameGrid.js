@@ -63,7 +63,7 @@ export default function ProductFrameGrid({
    const imageIndex = colorIndex(product, selectedColor)
     
     const imgURL = process.env.GATSBY_STRAPI_URL + (imageIndex !== -1 ? 
-        product.node.variants[imageIndex].images[0] :
+        product.node.variants[imageIndex].images[0].url :
         variant.images[0].url)
 
     const productName = product.node.name.split(" ")[0]
@@ -95,7 +95,7 @@ export default function ProductFrameGrid({
            selectedColor={selectedColor}
            selectedSize={selectedSize} 
            setSelectedSize={setSelectedSize}
-        setSelectedColor={setSelectedColor}
+           setSelectedColor={setSelectedColor}
            />
        </Grid>
     )
