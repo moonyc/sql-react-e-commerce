@@ -21,7 +21,15 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.main,
     height: '100%',
     width: '100%',
-    padding: '1rem'
+    padding: '1rem',
+    [theme.breakpoints.down('md')]:
+    {
+      height: '50%'
+    },
+    [theme.breakpoints.down('sm')]:
+    {
+      height:'26rem'
+    }
   },
   productImage: {
     width: '20rem'
@@ -61,7 +69,7 @@ export default function ProductFrameList({
     console.log( )
     return (
         <Grid item container>
-            <Grid item xs={9} container classes={{root: classes.frame}} alignItems="center" justifyContent="space-around">
+            <Grid item lg={9} container classes={{root: classes.frame}} alignItems="center" justifyContent="space-around">
                 {images.slice(0, 4).map(image => (
                     <>
                     <Grid item 
@@ -75,7 +83,7 @@ export default function ProductFrameList({
                     
                 ))}
             </Grid>
-            <Grid item xs={3} container direction="column" justifyContent="space-between" classes={{root: classes.info}}>
+            <Grid item lg={3} container direction="column" justifyContent="space-between" classes={{root: classes.info}}>
                 <Grid item container direction="column" 
                   component={Link} 
                   to={`/${product.node.category.name.toLowerCase()}/${product.node.name.split(" ")[0].toLowerCase()}`}

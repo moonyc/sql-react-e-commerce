@@ -23,7 +23,11 @@ const useStyles = makeStyles(theme =>({
     alignSelf: 'flex-end',
     marginRight: "2%",
     marginTop: '-3rem',
-    marginBottom: '4rem'
+    marginBottom: '4rem',
+    [theme.breakpoints.only('md')]:
+    {
+      marginTop: '1rem'
+    }
    },
    "@global" : {
     '.MuiPaginationItem-root': {
