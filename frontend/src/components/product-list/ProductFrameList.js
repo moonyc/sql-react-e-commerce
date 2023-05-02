@@ -53,7 +53,7 @@ export default function ProductFrameList({
 }) {
     const classes = useStyles()
 
-    const imageIndex = colorIndex(product, selectedColor)
+    const imageIndex = colorIndex(product, variant, selectedColor)
 
     const images = imageIndex !== -1 ? product.node.variants[imageIndex].images 
     : variant.images
