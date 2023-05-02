@@ -92,7 +92,10 @@ query GetCategoryProducts($strapiId: Int!) {
       node {
         strapi_id
         id
-        name
+        name 
+        category {
+          name
+        }
         variants {
           color
           id

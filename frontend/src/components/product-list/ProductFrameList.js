@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'gatsby'
 import Grid from '@material-ui/core/Grid'
 import Typography  from '@material-ui/core/Typography'
 import Chip  from '@material-ui/core/Chip'
@@ -32,7 +33,11 @@ const useStyles = makeStyles(theme => ({
     maxWidth: '13rem'
   },
   chipLabel: {
-    fontSize: '2rem'
+    fontSize: '2rem',
+    "&:hover": 
+    {
+      cursor: 'pointer'
+    }
   }
 }))
 
@@ -53,12 +58,16 @@ export default function ProductFrameList({
     const images = imageIndex !== -1 ? product.node.variants[imageIndex].images 
     : variant.images
 
+    console.log( )
     return (
         <Grid item container>
             <Grid item xs={9} container classes={{root: classes.frame}} alignItems="center" justifyContent="space-around">
                 {images.slice(0, 4).map(image => (
                     <>
-                    <Grid item key={image.url}>
+                    <Grid item 
+                         key={image.url} 
+                         component={Link} 
+                         to={`/${product.node.category.name.toLowerCase()}/${product.node.name.split(" ")[0].toLowerCase()}`}>
                        <img  className={classes.productImage} src={process.env.GATSBY_STRAPI_URL + image.url} alt={image.url}/>
                     </Grid>
                     
@@ -67,7 +76,10 @@ export default function ProductFrameList({
                 ))}
             </Grid>
             <Grid item xs={3} container direction="column" justifyContent="space-between" classes={{root: classes.info}}>
-                <Grid item container direction="column">
+                <Grid item container direction="column" 
+                  component={Link} 
+                  to={`/${product.node.category.name.toLowerCase()}/${product.node.name.split(" ")[0].toLowerCase()}`}
+                >
                 <Grid item>
                      <Typography variant="h4">
                         {product.node.name.split(" ")[0]}

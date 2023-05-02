@@ -1,5 +1,4 @@
 import React, { useState} from 'react'
-import clsx from 'clsx'
 import Grid from '@material-ui/core/Grid'
 import  Typography  from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
@@ -33,8 +32,10 @@ const useStyles = makeStyles(theme => ({
     ":nth-child(4n)": {
         marginRight: 0
     },
-    invisibility: {
-        visibility: 'hidden'
+    frameContainer: {
+        "&:hover": {
+            cursor: 'pointer'
+        }
     }
    }
 }))
@@ -68,9 +69,7 @@ export default function ProductFrameGrid({
 
     const productName = product.node.name.split(" ")[0]
     return (
-       <Grid item classes={{root: clsx({
-        [classes.invisibility]: open === true
-       })}}>
+       <Grid item classes={{root: classes.frameContainer }}>
            <Grid container direction="column" alignItems="center" onClick={() => setOpen(true)}>
                <Grid item classes={{root: classes.frame}}>
                 <img src={imgURL}

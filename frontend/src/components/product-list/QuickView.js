@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Rating from '../home/Rating'
 import Sizes from './Sizes'
 import Swatches from './Swatches'
+import { Link } from 'gatsby'
 
 import frame from '../../images/frame.svg'
 import explore from '../../images/explore.svg'
@@ -28,8 +29,8 @@ const useStyles = makeStyles(theme => ({
     maxWidth: '100%'
   },
   productImage: {
-    height: '39rem',
-    marginTop: '5rem'
+    height: '37rem',
+    marginTop: '1.58rem'
   },
   toolbar: {
     backgroundColor: theme.palette.primary.main,
@@ -102,12 +103,22 @@ export default function QuickView( {
      <Dialog classes={{ paper: classes.dialog }}open={open} onClose={() => setOpen(false)}>
         <DialogContent classes={{root: classes.selectedFrame}}> 
            <Grid container direction='column' alignItems="center">
-            <Grid item>
+            <Grid item
+            component={Link} 
+            to={`/${product.node.category.name.toLowerCase()}/${product.node.name.split(" ")[0].toLowerCase()}`}
+            >
                 <img src={url} alt="product" className={classes.productImage}/>
             </Grid>
             <Grid item container justifyContent="center" classes={{root: classes.toolbar}}>
                <Grid item classes={{root: classes.infoItem }}>
-                <Grid container direction="column" justifyContent="space-between" classes={{root: classes.infoContainer}}>
+                <Grid 
+                    container 
+                    direction="column" 
+                    justifyContent="space-between" 
+                    classes={{root: classes.infoContainer}}
+                    component={Link} 
+                    to={`/${product.node.category.name.toLowerCase()}/${product.node.name.split(" ")[0].toLowerCase()}`}
+                    >
                    <Grid item>
                      <Typography variant="h4">
                        {name}
