@@ -17,10 +17,20 @@ const useStyles = makeStyles(theme => ({
     width: '25rem',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    [theme.breakpoints.down('xs')]:
+    {
+        
+        width: '20rem'
+    }
    },
    product: {
-    width: '20rem'
+    width: '20rem',
+    [theme.breakpoints.down('xs')]:
+    {
+        
+        width: '15rem'
+    }
    },
    title: {
     backgroundColor: theme.palette.primary.main,
@@ -37,6 +47,11 @@ const useStyles = makeStyles(theme => ({
         "&:hover": {
             cursor: 'pointer'
         }
+    },
+    [theme.breakpoints.down('xs')]:
+    {
+        width: '20rem',
+        marginTop: '-2rem'
     }
    }
 }))

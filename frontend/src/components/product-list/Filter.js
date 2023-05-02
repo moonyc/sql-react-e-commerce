@@ -29,20 +29,24 @@ export default function Filter({ setOption, filterOptions }) {
 
     
     return(
-        <Grid item container justifyContent='space-between' alignItems="center">
+        <Grid 
+            item 
+            container 
+            justifyContent='space-between' 
+            alignItems="center" 
+            classes={{root: classes.mainContainer}}>
             <Grid item>
                 <IconButton onClick={() => setOption(null)}>
                     <img src={filter} alt="filter" />
                 </IconButton>
             </Grid>
             <Grid item xs>
-                <Grid container justifyContent="space-around" alignItems="center"
-                 classes={{root: classes.mainContainer}}>
+                <Grid container justifyContent="space-around" >
                    {Object.keys(filterOptions).filter(option => (
                      filterOptions[option] !== null
                    )).map(option => (
                     <Grid item key={option}>
-                      <Grid container direction="column">
+                      <Grid container direction="column" justifyContent='center'>
                          <Grid item>
                          <Chip 
                          label={option}  
