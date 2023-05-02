@@ -2,7 +2,8 @@ import React, { useState} from 'react'
 import Grid from '@material-ui/core/Grid'
 import  Typography  from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
-
+import { useMediaQuery } from '@material-ui/core'
+import { navigate } from 'gatsby'
 import QuickView from './QuickView'
 import frame from '../../images/frame.svg'
 
@@ -60,6 +61,11 @@ export default function ProductFrameGrid({
 }) {
     const classes = useStyles()
     const [open, setOpen] = useState(false)
+    const matchesMD = useMediaQuery(theme => theme.breakpoints.down('md'))
+    
+    if(matchesMD && open) {
+       setOpen(false)
+    } 
 
    const imageIndex = colorIndex(product, variant, selectedColor)
     
@@ -70,7 +76,8 @@ export default function ProductFrameGrid({
     const productName = product.node.name.split(" ")[0]
     return (
        <Grid item classes={{root: classes.frameContainer }}>
-           <Grid container direction="column" alignItems="center" onClick={() => setOpen(true)}>
+           <Grid container direction="column" alignItems="center" onClick={() => matchesMD ?
+            navigate(`/${product.node.category.name.toLowerCase()}/${product.node.name.split(" ")[0].toLowerCase()}`) : setOpen(true)}>
                <Grid item classes={{root: classes.frame}}>
                 <img src={imgURL}
                     alt={product.node.name}
