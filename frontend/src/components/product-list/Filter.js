@@ -18,14 +18,28 @@ const useStyles = makeStyles(theme => ({
    },
    checkbox: {
     color:'#fff',
-    
-   }
+    },
+    optionsContainer: {
+        [theme.breakpoints.down('xs')]: {
+            "& > :not(:last-child)":{
+                marginBottom: '2rem'
+            }
+        }
+    }
 }
 ))
 
-export default function Filter({ setOption, filterOptions }) {
+export default function Filter({ setOption, filterOptions, setFilterOptions }) {
     const classes = useStyles()
     
+
+    const handleFilter = (option, i) => {
+        // Intermediary -> we can't directly change the state
+        const newFilters = {...filterOptions} 
+        // Toggling the value:
+        newFilters[option][i].checked = ! newFilters[option][i].checked
+        setFilterOptions(newFilters)
+    }
 
     
     return(
@@ -41,7 +55,10 @@ export default function Filter({ setOption, filterOptions }) {
                 </IconButton>
             </Grid>
             <Grid item xs>
-                <Grid container justifyContent="space-around" >
+                <Grid container 
+                   justifyContent="space-around" 
+                   classes={{root: classes.optionsContainer}}
+                   >
                    {Object.keys(filterOptions).filter(option => (
                      filterOptions[option] !== null
                    )).map(option => (
@@ -55,12 +72,17 @@ export default function Filter({ setOption, filterOptions }) {
                         <Grid item>
                            <FormControl>
                              <FormGroup>
-                                {filterOptions[option].map(({label, checked}) => (
+                                {filterOptions[option].map(({label, checked}, i) => (
                                     <FormControlLabel 
                                     classes={{label: classes.checkbox}}
                                     key={label} 
                                     label={label} 
-                                    control={<Checkbox classes={{root: classes.checkbox}}checked={checked} name={label} />} />
+                                    control={<Checkbox 
+                                         classes={{root: classes.checkbox}}
+                                         checked={checked} 
+                                         name={label} 
+                                         onChange={() => handleFilter(option, i)}
+                                         />} />
                                 ))}
                              </FormGroup>
                            </FormControl>

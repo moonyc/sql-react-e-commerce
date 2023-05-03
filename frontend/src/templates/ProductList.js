@@ -41,13 +41,14 @@ const useStyles = makeStyles(theme =>({
    }
 }))
 
-export default function ProductLists({ pageContext: { filterOptions, name, description},
+export default function ProductLists({ pageContext: { filterOptions: options, name, description},
    data: { allStrapiProduct: { edges: products },
   },
 }) {
    const classes = useStyles()
    const [layout, setLayout] = useState("grid") 
    const [page, setPage] = useState(1)
+   const [filterOptions, setFilterOptions] = useState(options)
    const scrollRef = useRef(null)
 
    const scroll = () => {
@@ -65,6 +66,7 @@ export default function ProductLists({ pageContext: { filterOptions, name, descr
          <div ref={scrollRef}/>
             <DynamicToolbar 
             filterOptions={filterOptions}
+            setFilterOptions={setFilterOptions}
             name={name}
             description={description}
             layout={layout}

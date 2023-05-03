@@ -18,7 +18,8 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function DynamicToolbar({ 
-  filterOptions, 
+  filterOptions,
+  setFilterOptions, 
   name,
   description, 
   layout, 
@@ -33,7 +34,9 @@ export default function DynamicToolbar({
           <FunctionContainer 
           option={option}
           setOption={setOption}
-          filterOptions={filterOptions}/>
+          filterOptions={filterOptions}
+          setFilterOptions={setFilterOptions}
+          />
           {option === null && 
             <DescriptionContainer 
             name={name} 
