@@ -114,6 +114,7 @@ query GetCategoryProducts($strapiId: Int!) {
           size
           style
           price
+          colorLabel,
           images {
             url
           }
