@@ -86,6 +86,8 @@ export default function ListOfProducts({ products, layout, page, productsPerPage
     var content = []
     products.map((product, index) => product.node.variants.map(variant => content.push({ product: index, variant: variant})))
     
+
+    let isFiltered = false
    /* The filter method passes a function that tests each item. */
     const filteredProducts = content.filter(item => {
         let valid;
@@ -95,6 +97,7 @@ export default function ListOfProducts({ products, layout, page, productsPerPage
               .map(option => {
                 filterOptions[option].forEach(value => {
                     if(value.checked){
+                        isFiltered = true
                         if(item.variant[option.toLowerCase()] === value.label) {
                             valid = item
                         }
@@ -104,6 +107,11 @@ export default function ListOfProducts({ products, layout, page, productsPerPage
 
         return valid
     })
+
+    if(isFiltered)
+    {
+        content = filteredProducts
+    }
     return (
        <Grid item container 
           direction={matchesSM ? 'column' : 'row'} 

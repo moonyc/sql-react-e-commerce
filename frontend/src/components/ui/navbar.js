@@ -160,7 +160,7 @@ function NavBar({ categories }) {
                     />
                     </IconButton>
                     )}
-                    else { return (null)}
+                   
                  } 
                 )}
             </Toolbar>

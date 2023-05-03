@@ -77,6 +77,7 @@ export default function MarketingButtons() {
         {buttons.map((button) => (
             <Grid item >
               <Grid 
+              key={button.label.toLowerCase()}
               container 
               alignItems="center" 
               justifyContent="center" 
