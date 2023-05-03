@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function ListOfProducts({ products, layout, page, productsPerPage}) {
+export default function ListOfProducts({ products, layout, page, productsPerPage, filterOptions}) {
     const classes = useStyles({ layout })
     const matchesSM = useMediaQuery(theme => theme.breakpoints.down('sm'))
 
@@ -85,6 +85,25 @@ export default function ListOfProducts({ products, layout, page, productsPerPage
     
     var content = []
     products.map((product, index) => product.node.variants.map(variant => content.push({ product: index, variant: variant})))
+    
+   /* The filter method passes a function that tests each item. */
+    const filteredProducts = content.filter(item => {
+        let valid;
+        
+        Object.keys(filterOptions)
+              .filter(option => filterOptions[option] !== null)
+              .map(option => {
+                filterOptions[option].forEach(value => {
+                    if(value.checked){
+                        if(item.variant[option.toLowerCase()] === value.label) {
+                            valid = item
+                        }
+                    }
+                })
+              })
+
+        return valid
+    })
     return (
        <Grid item container 
           direction={matchesSM ? 'column' : 'row'} 

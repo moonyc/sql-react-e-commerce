@@ -73,7 +73,13 @@ export default function ProductLists({ pageContext: { filterOptions: options, na
             setLayout={setLayout}
             setPage={setPage}
             />
-            <ListOfProducts page={page} productsPerPage={productsPerPage} layout={layout} products={products}/>
+            <ListOfProducts 
+              page={page} 
+              productsPerPage={productsPerPage} 
+              layout={layout} 
+              products={products}
+              filterOptions={filterOptions}
+              />
             <Pagination 
             color="primary" 
             count={numberOfPages} 
