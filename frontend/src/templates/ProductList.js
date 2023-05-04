@@ -77,10 +77,13 @@ export default function ProductLists({ pageContext: { filterOptions: options, na
    const productsPerPage = layout === 'grid' ? 8 : 4
    
    
-   // Logic for filtering 
+   // Logic for filtering and sorting
 
    var content = []
-   products.map((product, index) => product.node.variants.map(variant => content.push({ product: index, variant: variant })))
+   const selectedSort = sortOptions.filter(option => option.active)[0]
+   const sortedProducts = selectedSort.function(products)
+
+   sortedProducts.map((product, index) => product.node.variants.map(variant => content.push({ product: index, variant: variant })))
 
 
    let isFiltered = false
@@ -186,6 +189,7 @@ query GetCategoryProducts($strapiId: Int!) {
     edges {
       node {
         strapi_id
+        createdAt
         id
         name 
         category {
@@ -197,7 +201,7 @@ query GetCategoryProducts($strapiId: Int!) {
           size
           style
           price
-          colorLabel,
+          colorLabel
           images {
             url
           }
