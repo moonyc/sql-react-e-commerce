@@ -63,10 +63,72 @@ export default function ProductLists({ pageContext: { filterOptions: options, na
    },[filterOptions, layout])
 
    const productsPerPage = layout === 'grid' ? 8 : 4
-   var numberOfVariants = 0
-   products.map(product => numberOfVariants += product.node.variants.length)
+   
+   
+   // Logic for filtering 
 
-   const numberOfPages = Math.ceil( numberOfVariants / productsPerPage )
+   var content = []
+   products.map((product, index) => product.node.variants.map(variant => content.push({ product: index, variant: variant })))
+
+
+   let isFiltered = false
+   let filters = {}
+   let filteredProducts = []
+   /* The filter method passes a function that tests each item. */
+
+   Object.keys(filterOptions)
+       .filter(option => filterOptions[option] !== null)
+       .map(option => {
+           filterOptions[option].forEach(value => {
+               if (value.checked) {
+                   isFiltered = true
+                   
+                   if(filters[option] === undefined) {
+                       filters[option] = []
+                   }
+
+                   if(!filters[option].includes(value)) {
+                       filters[option].push(value)
+                   }
+
+                   content.forEach(item => {
+                       if (option === 'Color') {
+                           if (item.variant.colorLabel === value.label &&
+                               !filteredProducts.includes(item)) 
+                               {
+                               filteredProducts.push(item)
+                               }
+                       } else if (item.variant[option.toLowerCase()] === value.label &&
+                       !filteredProducts.includes(item)) {
+                           filteredProducts.push(item)
+                       }
+                   })
+               }
+           })
+       })
+
+   Object.keys(filters).forEach(filter => {
+       filteredProducts = filteredProducts.filter(item => {
+           let valid
+            
+           filters[filter].some(value => {
+               if(filter === 'Color') {
+                   if (item.variant.colorLabel === value.label) {
+                       valid = item
+                   }
+               } else if (item.variant[filter.toLowerCase()] === value.label) {
+                   valid = item
+               }
+           })
+           return valid
+       })
+   })
+
+   if (isFiltered) {
+       content = filteredProducts
+   }
+
+   const numberOfPages = Math.ceil( content.length / productsPerPage )
    return(
       <Layout>
          <Grid container direction="column" alignItems="center">
@@ -84,6 +146,7 @@ export default function ProductLists({ pageContext: { filterOptions: options, na
               productsPerPage={productsPerPage} 
               layout={layout} 
               products={products}
+              content={content}
               filterOptions={filterOptions}
               />
             <Pagination 

@@ -48,7 +48,14 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function ListOfProducts({ products, layout, page, productsPerPage, filterOptions }) {
+export default function ListOfProducts({ 
+    products, 
+    content,
+    layout, 
+    page, 
+    productsPerPage, 
+    filterOptions 
+}) {
     const classes = useStyles({ layout })
     const matchesSM = useMediaQuery(theme => theme.breakpoints.down('sm'))
 
@@ -82,73 +89,16 @@ export default function ListOfProducts({ products, layout, page, productsPerPage
         )
     }
 
-    var content = []
-    products.map((product, index) => product.node.variants.map(variant => content.push({ product: index, variant: variant })))
 
-
-    let isFiltered = false
-    let filters = {}
-    let filteredProducts = []
-    /* The filter method passes a function that tests each item. */
-
-    Object.keys(filterOptions)
-        .filter(option => filterOptions[option] !== null)
-        .map(option => {
-            filterOptions[option].forEach(value => {
-                if (value.checked) {
-                    isFiltered = true
-                    
-                    if(filters[option] === undefined) {
-                        filters[option] = []
-                    }
-
-                    if(!filters[option].includes(value)) {
-                        filters[option].push(value)
-                    }
-
-                    content.forEach(item => {
-                        if (option === 'Color') {
-                            if (item.variant.colorLabel === value.label &&
-                                !filteredProducts.includes(item)) 
-                                {
-                                filteredProducts.push(item)
-                                }
-                        } else if (item.variant[option.toLowerCase()] === value.label &&
-                        !filteredProducts.includes(item)) {
-                            filteredProducts.push(item)
-                        }
-                    })
-                }
-            })
-        })
-
-    Object.keys(filters).forEach(filter => {
-        filteredProducts = filteredProducts.filter(item => {
-            let valid
-             
-            filters[filter].some(value => {
-                if(filter === 'Color') {
-                    if (item.variant.colorLabel === value.label) {
-                        valid = item
-                    }
-                } else if (item.variant[filter.toLowerCase()] === value.label) {
-                    valid = item
-                }
-            })
-            return valid
-        })
-    })
-
-    if (isFiltered) {
-        content = filteredProducts
-    }
     return (
         <Grid item container
             direction={matchesSM ? 'column' : 'row'}
             classes={{ root: classes.productContainer }}
             alignItems={matchesSM ? 'center' : undefined}
         >
-            {content.slice((page - 1) * productsPerPage, page * productsPerPage).map(item => (
+            {content
+             .slice((page - 1) * productsPerPage, page * productsPerPage)
+             .map(item => (
                 <FrameHelper
                     Frame={layout === 'grid' ? ProductFrameGrid : ProductFrameList}
                     key={item.variant.id}
