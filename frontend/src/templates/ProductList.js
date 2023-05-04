@@ -1,4 +1,4 @@
-import React, { useState, useRef} from 'react'
+import React, { useState, useRef, useEffect} from 'react'
 import { graphql } from 'gatsby'
 import Pagination from '@material-ui/lab/Pagination'
 import { Fab } from '@material-ui/core'
@@ -55,6 +55,13 @@ export default function ProductLists({ pageContext: { filterOptions: options, na
     scrollRef.current.scrollIntoView({ behavior: 'smooth'})
    }
 
+   // By using useEffect without
+   // specifying a list of dependencies,
+   //  the code will run in everyrerender.
+   useEffect(() => {
+    setPage(1)
+   },[filterOptions, layout])
+
    const productsPerPage = layout === 'grid' ? 8 : 4
    var numberOfVariants = 0
    products.map(product => numberOfVariants += product.node.variants.length)
@@ -71,7 +78,6 @@ export default function ProductLists({ pageContext: { filterOptions: options, na
             description={description}
             layout={layout}
             setLayout={setLayout}
-            setPage={setPage}
             />
             <ListOfProducts 
               page={page} 
