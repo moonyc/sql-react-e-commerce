@@ -55,7 +55,7 @@ export default function Sort({ setOption, sortOptions, setSortOptions }) {
                          onClick={() => handleSort(index)}  
                          color = {option.active !== true ? "primary" : "secondary"}
                          classes={{root: clsx({
-                            [classes.notActive] : option.active != true
+                            [classes.notActive] : option.active !== true
                          })}}
                         />
                      </Grid>
