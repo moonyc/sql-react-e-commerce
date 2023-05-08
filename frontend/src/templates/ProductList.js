@@ -182,7 +182,7 @@ export default function ProductLists({ pageContext: { filterOptions: options, na
    )
 }
 
-// Context
+// Context 
 export const query = graphql`
 query GetCategoryProducts($strapiId: Int!) {
   allStrapiProduct(filter: {category: {strapi_id: {eq: $strapiId}}}) {
