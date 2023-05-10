@@ -3,6 +3,7 @@ import { Grid } from '@material-ui/core'
 
 import Layout from '../components/ui/layout'
 import ProductImages from '../components/product-detail/ProductImages'
+import ProductInfo from '../components/product-detail/ProductInfo'
 
 export default function ProductDetail({ pageContext : {
    name,
@@ -17,9 +18,17 @@ export default function ProductDetail({ pageContext : {
    return(
     <Layout>
      <Grid container direction='column'>
+        <Grid item container>
         <ProductImages images={variants[selectedVariant].images} selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
+        </Grid>
+       <ProductInfo 
+         name={name}
+         description={description}
+         variants={variants}
+         selectedVariant={selectedVariant}     
+         setSelectedVariant={setSelectedVariant} 
+      />
      </Grid>
-    
     </Layout>
    )
 }
